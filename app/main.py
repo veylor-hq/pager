@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import config
 from app.core.database import db
+from api.router import api_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -36,3 +37,6 @@ app = get_application()
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+app.include_router(api_router)
